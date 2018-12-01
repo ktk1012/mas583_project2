@@ -11,4 +11,7 @@ cpu_bootstrap: bootstrap
 gpu_bootstrap:
 	cd $(REINFORCEFLOW_DIR); pip install -e .[tf-gpu]
 
+clean:
+	rm -r $(REINFORCEFLOW_DIR)
+
 .PHONY: bootstrap cpu_bootstrap gpu_bootstrap
