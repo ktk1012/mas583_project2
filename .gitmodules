@@ -1,3 +1,4 @@
 [submodule "lib/reinforceflow"]
 	path = lib/reinforceflow
 	url = https://github.com/ktk1012/reinforceflow
+	ignore = dirty
