@@ -13,6 +13,7 @@ except ImportError:
 from reinforceflow.agents import DeepQ
 from reinforceflow.envs import Vectorize
 from reinforceflow.core import EGreedyPolicy, ProportionalReplay, BackPropagationReplay
+from reinforceflow.core import WindoedBackPropagationReplay
 from reinforceflow.core import Adam
 from reinforceflow.models import FullyConnected
 from reinforceflow.trainers.replay_trainer import ReplayTrainer
@@ -42,13 +43,18 @@ backPropagationReplay = BackPropagationReplay(
     32,
     beta=20)
 
+windowedPropagationReplay = WindoedBackPropagationReplay(
+    30000,
+    32,
+    100,
+    32)
+
 trainer = ReplayTrainer(env=env,
                         agent=agent,
                         maxsteps=300000,
-                        replay=backPropagationReplay,
+                        replay=windowedPropagationReplay,
                         logdir='tmp/rf/DeepQ/%s' % env_name,
-                        logfreq=10,
-                        test_render=True)
+                        logfreq=10)
 
 if __name__ == '__main__':
     trainer.train()
